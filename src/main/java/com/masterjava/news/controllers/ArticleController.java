@@ -20,6 +20,9 @@ public class ArticleController {
     @GetMapping()
     public ResponseEntity<?> getAllArticles(){return ResponseEntity.ok().body(articleService.getAllArticles());}
 
+    @GetMapping("/byTitle")
+    public ResponseEntity<?> getArticleByName(@RequestParam String title){return ResponseEntity.ok().body(articleService.getArticleByTitle(title));}
+
     @GetMapping("/byAuthor")
     public ResponseEntity<?> getArticlesByAuthor(@RequestParam String authorName)
     {

@@ -1,5 +1,6 @@
 package com.masterjava.news.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.masterjava.news.models.Article;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ public class CommentDTO {
     private String personName;
     private String content;
     private int articleId;
+    @JsonIgnore
     private Date date;
 
     public int getId() {
@@ -52,12 +54,12 @@ public class CommentDTO {
         this.date = date;
     }
 
-    public CommentDTO(int id, String personName, String content, int articleId, Date date) {
+    public CommentDTO(int id, String personName, String content, int articleId) {
         this.id = id;
         this.personName = personName;
         this.content = content;
         this.articleId = articleId;
-        this.date = date;
+        this.date = new Date();
     }
 
     public CommentDTO() {

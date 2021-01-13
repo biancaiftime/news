@@ -38,6 +38,15 @@ public class ArticleRepository {
         return articles;
     }
 
+    public Article getArticleByTitle(String title)
+    {
+        var article = jdbcTemplate.query(ArticleQueries.getArticleByName, new Object[]{title}, new ArticleRowMapper()).stream().findFirst().get();
+        article.setTopics(new ArrayList<Topic>(jdbcTemplate.query(ArticleQueries.getTopicsForArticle,
+                new Object[]{article.getId()},
+                new BeanPropertyRowMapper(Topic.class))));
+        return article;
+    }
+
     public List<Article> addArticle(ArticleDTO articleDTO)
     {
         KeyHolder keyHolder = new GeneratedKeyHolder();

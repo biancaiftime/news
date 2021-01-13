@@ -28,6 +28,13 @@ public class ArticleService {
         return articles;
     }
 
+    public Article getArticleByTitle(String title)
+    {
+        var article = articleRepository.getArticleByTitle(title);
+        auditRepository.addRecord(new Audit(Operation.GET, ObjectType.Article, "getArticleByName() method invoked", new Date()));
+        return article;
+    }
+
     public List<Article> addArticle(ArticleDTO articleDTO)
     {
         var articles =  articleRepository.addArticle(articleDTO);
