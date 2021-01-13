@@ -22,7 +22,6 @@ public class ArticleDTO {
     @NotEmpty
     private Category category;
 
-    private Date date;
 
     public int getId() {
         return id;
@@ -72,22 +71,14 @@ public class ArticleDTO {
         this.category = category;
     }
 
-    public Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public ArticleDTO(int id, String title, String content, int authorId, ArrayList<Integer> topicsIDs, Category category, Date date) {
+    public ArticleDTO(int id, String title, String content, int authorId, ArrayList<Integer> topicsIDs, Category category) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.authorId = authorId;
         this.topicsIDs = topicsIDs;
         this.category = category;
-        this.date = date;
     }
 
     public ArticleDTO() {

@@ -88,6 +88,14 @@ public class Article {
         this.date = date;
     }
 
+    public Article(int id, String title, String content, Category category, Date date) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.category = category;
+        this.date = date;
+    }
+
     public Article() {
     }
 }
