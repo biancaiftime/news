@@ -18,9 +18,17 @@ public class AuthorRepository {
 
     public Author getAuthorByName(String name) {return jdbcTemplate.query(AuthorQueries.getAuthorByName, new Object[]{name},new BeanPropertyRowMapper<>(Author.class)).stream().findFirst().get();}
 
+    public Author getAuthorById(int id) {return jdbcTemplate.query(AuthorQueries.getAuthorById, new Object[]{id},new BeanPropertyRowMapper<>(Author.class)).stream().findFirst().get();}
+
     public List<Author> addAuthor(Author author)
     {
         jdbcTemplate.update(AuthorQueries.addAuthor, author.getFirstName(), author.getLastName(), author.getBio());
+        return jdbcTemplate.query(AuthorQueries.getAuthors, new BeanPropertyRowMapper<>(Author.class));
+    }
+
+    public List<Author> deleteAuthor(int id)
+    {
+        jdbcTemplate.update(AuthorQueries.deleteAuthor, id);
         return jdbcTemplate.query(AuthorQueries.getAuthors, new BeanPropertyRowMapper<>(Author.class));
     }
 }

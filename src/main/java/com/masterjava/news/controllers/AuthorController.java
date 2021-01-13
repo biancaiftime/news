@@ -1,6 +1,5 @@
 package com.masterjava.news.controllers;
 
-import com.masterjava.news.models.Article;
 import com.masterjava.news.models.Author;
 import com.masterjava.news.services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/authors")
@@ -29,4 +27,7 @@ public class AuthorController {
     {
         return ResponseEntity.ok().body(authorService.addAuthor(author));
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteAuthor(@RequestParam int id) {return ResponseEntity.ok().body(authorService.deleteAuthor(id));}
 }

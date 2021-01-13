@@ -1,12 +1,14 @@
-package com.masterjava.news.models;
+package com.masterjava.news.dto;
+
+import com.masterjava.news.models.Author;
+import com.masterjava.news.models.Category;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Article {
-
+public class ArticleDTO {
     private int id;
     @NotEmpty
     @Size(max = 30)
@@ -15,8 +17,8 @@ public class Article {
     @Size(min = 50)
     private String content;
     @NotEmpty
-    private Author author;
-    private ArrayList<Topic> topics;
+    private int authorId;
+    private ArrayList<Integer> topicsIDs;
     @NotEmpty
     private Category category;
 
@@ -46,20 +48,20 @@ public class Article {
         this.content = content;
     }
 
-    public Author getAuthor() {
-        return author;
+    public int getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 
-    public ArrayList<Topic> getTopics() {
-        return topics;
+    public ArrayList<Integer> getTopicsIDs() {
+        return topicsIDs;
     }
 
-    public void setTopics(ArrayList<Topic> topics) {
-        this.topics = topics;
+    public void setTopicsIDs(ArrayList<Integer> topicsIDs) {
+        this.topicsIDs = topicsIDs;
     }
 
     public Category getCategory() {
@@ -78,16 +80,16 @@ public class Article {
         this.date = date;
     }
 
-    public Article(int id, String title, String content, Author author, ArrayList<Topic> topics, Category category, Date date) {
+    public ArticleDTO(int id, String title, String content, int authorId, ArrayList<Integer> topicsIDs, Category category, Date date) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.author = author;
-        this.topics = topics;
+        this.authorId = authorId;
+        this.topicsIDs = topicsIDs;
         this.category = category;
         this.date = date;
     }
 
-    public Article() {
+    public ArticleDTO() {
     }
 }

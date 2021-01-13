@@ -4,5 +4,6 @@ public enum ObjectType {
     Author,
     Article,
     Comment,
-    Topic
+    Topic,
+    Relation
 }
