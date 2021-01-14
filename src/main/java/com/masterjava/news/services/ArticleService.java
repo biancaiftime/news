@@ -17,28 +17,29 @@ public class ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
 
-    @Autowired
-    private AuditRepository auditRepository;
-
 
     public List<Article> getAllArticles()
     {
-        var articles =  articleRepository.getAllArticles();
-        auditRepository.addRecord(new Audit(Operation.GET, ObjectType.Article, "getAllArticles() method invoked",new Date()));
-        return articles;
+        return articleRepository.getAllArticles();
     }
 
     public Article getArticleByTitle(String title)
     {
-        var article = articleRepository.getArticleByTitle(title);
-        auditRepository.addRecord(new Audit(Operation.GET, ObjectType.Article, "getArticleByName() method invoked", new Date()));
-        return article;
+        return articleRepository.getArticleByTitle(title);
+    }
+
+    public List<Article> getArticlesByAuthorId(int authorId)
+    {
+        return articleRepository.getArticlesByAuthorId(authorId);
     }
 
     public List<Article> addArticle(ArticleDTO articleDTO)
     {
-        var articles =  articleRepository.addArticle(articleDTO);
-        auditRepository.addRecord(new Audit(Operation.ADD, ObjectType.Article, "addArticle() method invoked",new Date()));
-        return articles;
+        return articleRepository.addArticle(articleDTO);
+    }
+
+    public List<Article> deleteArticle(int articleId)
+    {
+        return articleRepository.deleteArticle(articleId);
     }
 }

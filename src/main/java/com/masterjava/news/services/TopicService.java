@@ -17,35 +17,24 @@ public class TopicService {
     @Autowired
     private TopicRepository topicRepository;
 
-    @Autowired
-    private AuditRepository auditRepository;
-
 
     public List<Topic> getAllTopics()
     {
-        var topics =  topicRepository.getAllTopics();
-        auditRepository.addRecord(new Audit(Operation.GET, ObjectType.Topic, "getAllTopics() method invoked",new Date()));
-        return topics;
+        return topicRepository.getAllTopics();
     }
 
     public Topic getTopicByName(String name)
     {
-        var topics =  topicRepository.getTopicByName(name);
-        auditRepository.addRecord(new Audit(Operation.GET, ObjectType.Topic, "getTopicByName() method invoked",new Date()));
-        return topics;
+        return topicRepository.getTopicByName(name);
     }
 
     public List<Topic> addTopic(Topic topic)
     {
-        var topics = topicRepository.addTopic(topic);
-        auditRepository.addRecord(new Audit(Operation.ADD, ObjectType.Topic, "addTopic() method invoked",new Date()));
-        return topics;
+        return topicRepository.addTopic(topic);
     }
 
     public List<Topic> deleteTopic(int id)
     {
-        var topics = topicRepository.deleteTopic(id);
-        auditRepository.addRecord(new Audit(Operation.DELETE, ObjectType.Topic, "deleteTopic() method invoked",new Date()));
-        return topics;
+        return topicRepository.deleteTopic(id);
     }
 }

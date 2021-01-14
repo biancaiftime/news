@@ -9,7 +9,7 @@ public class CommentDTO {
 
     private int id;
     private String personName;
-    private String content;
+    private String text;
     private int articleId;
     @JsonIgnore
     private Date date;
@@ -30,12 +30,12 @@ public class CommentDTO {
         this.personName = personName;
     }
 
-    public String getContent() {
-        return content;
+    public String getText() {
+        return text;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setText(String content) {
+        this.text = content;
     }
 
     public int getArticleId() {
@@ -54,10 +54,10 @@ public class CommentDTO {
         this.date = date;
     }
 
-    public CommentDTO(int id, String personName, String content, int articleId) {
+    public CommentDTO(int id, String personName, String text, int articleId) {
         this.id = id;
         this.personName = personName;
-        this.content = content;
+        this.text = text;
         this.articleId = articleId;
         this.date = new Date();
     }

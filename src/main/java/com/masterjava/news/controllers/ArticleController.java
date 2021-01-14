@@ -23,14 +23,14 @@ public class ArticleController {
     @GetMapping("/byTitle")
     public ResponseEntity<?> getArticleByName(@RequestParam String title){return ResponseEntity.ok().body(articleService.getArticleByTitle(title));}
 
-    @GetMapping("/byAuthor")
-    public ResponseEntity<?> getArticlesByAuthor(@RequestParam String authorName)
-    {
-        return null;
-    }
+    @GetMapping("/byAuthorId")
+    public ResponseEntity<?> getArticlesByAuthorId(@RequestParam int authorId){return ResponseEntity.ok().body(articleService.getArticlesByAuthorId(authorId));}
+
 
     @PostMapping("/add")
     public ResponseEntity<?> addArticle(@RequestBody ArticleDTO articleDTO) {return ResponseEntity.ok().body(articleService.addArticle(articleDTO));}
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteArticle(@RequestParam int id) {return ResponseEntity.ok().body(articleService.deleteArticle(id));}
 
 }

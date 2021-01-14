@@ -3,6 +3,7 @@ package com.masterjava.news.repositories;
 
 import com.masterjava.news.dto.ArticleDTO;
 import com.masterjava.news.helpers.queries.ArticleQueries;
+import com.masterjava.news.helpers.rowmappers.ArticleRowMapper;
 import com.masterjava.news.models.Article;
 import com.masterjava.news.models.Author;
 import com.masterjava.news.models.Category;
@@ -47,6 +48,15 @@ public class ArticleRepository {
         return article;
     }
 
+    public List<Article> getArticlesByAuthorId(int authorId)
+    {
+        var articles = jdbcTemplate.query(ArticleQueries.getArticlesByAuthorId, new Object[]{authorId}, new ArticleRowMapper());
+        articles.forEach(article -> article.setTopics(new ArrayList<Topic>(jdbcTemplate.query(ArticleQueries.getTopicsForArticle,
+                new Object[]{article.getId()},
+                new BeanPropertyRowMapper(Topic.class)))));
+        return articles;
+    }
+
     public List<Article> addArticle(ArticleDTO articleDTO)
     {
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -64,22 +74,10 @@ public class ArticleRepository {
         return getAllArticles();
     }
 
-    public class ArticleRowMapper implements RowMapper<Article> {
-        @Override
-        public Article mapRow(ResultSet resultSet, int i) throws SQLException {
-            var article =  new Article(
-                    resultSet.getInt("id"),
-                    resultSet.getString("title"),
-                    resultSet.getString("content"),
-                    Category.valueOf(resultSet.getString("category")),
-                    resultSet.getDate("date"));
-            var author = new Author(
-                    resultSet.getInt("authorId"),
-                    resultSet.getString("firstName"),
-                    resultSet.getString("lastName"),
-                    resultSet.getString("bio"));
-            article.setAuthor(author);
-            return article;
-        }
+    public List<Article> deleteArticle(int articleId)
+    {
+        jdbcTemplate.update(ArticleQueries.deleteArticle, articleId);
+        return getAllArticles();
     }
+
 }
