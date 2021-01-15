@@ -1,5 +1,6 @@
 package com.masterjava.news.repositories;
 
+import com.masterjava.news.helpers.queries.ArticleQueries;
 import com.masterjava.news.helpers.queries.AuthorQueries;
 import com.masterjava.news.models.Author;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +32,6 @@ public class AuthorRepository {
         jdbcTemplate.update(AuthorQueries.deleteAuthor, id);
         return jdbcTemplate.query(AuthorQueries.getAuthors, new BeanPropertyRowMapper<>(Author.class));
     }
+
+    public void deleteAll() {jdbcTemplate.update(AuthorQueries.deleteAll);}
 }

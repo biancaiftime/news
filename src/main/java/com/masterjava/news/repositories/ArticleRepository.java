@@ -4,10 +4,7 @@ package com.masterjava.news.repositories;
 import com.masterjava.news.dto.ArticleDTO;
 import com.masterjava.news.helpers.queries.ArticleQueries;
 import com.masterjava.news.helpers.rowmappers.ArticleRowMapper;
-import com.masterjava.news.models.Article;
-import com.masterjava.news.models.Author;
-import com.masterjava.news.models.Category;
-import com.masterjava.news.models.Topic;
+import com.masterjava.news.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class ArticleRepository {
@@ -57,6 +55,20 @@ public class ArticleRepository {
         return articles;
     }
 
+    public List<Article> getArticlesByTopicId(int topicId)
+    {
+        var relations = jdbcTemplate.query(ArticleQueries.getArticlesForTopic, new Object[]{topicId}, new BeanPropertyRowMapper<>(Relation.class));
+        var articles = new ArrayList<Article>();
+        relations.forEach(r -> {
+            var article = jdbcTemplate.query(ArticleQueries.getArticleById, new Object[]{r.getArticleId()}, new ArticleRowMapper()).stream().findFirst().get();
+            article.setTopics(new ArrayList<Topic>(jdbcTemplate.query(ArticleQueries.getTopicsForArticle,
+                    new Object[]{article.getId()},
+                    new BeanPropertyRowMapper(Topic.class))));
+            articles.add(article);
+        });
+        return articles;
+    }
+
     public List<Article> addArticle(ArticleDTO articleDTO)
     {
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -79,5 +91,7 @@ public class ArticleRepository {
         jdbcTemplate.update(ArticleQueries.deleteArticle, articleId);
         return getAllArticles();
     }
+
+    public void deleteAll() {jdbcTemplate.update(ArticleQueries.deleteAll);}
 
 }

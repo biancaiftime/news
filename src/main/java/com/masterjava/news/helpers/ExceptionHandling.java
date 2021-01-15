@@ -1,5 +1,6 @@
 package com.masterjava.news.helpers;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +26,14 @@ public class ExceptionHandling {
                 .collect(Collectors.toList());
         body.put("timestamp", LocalDate.now());
         body.put("errors",bodyResponse);
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({SQLServerException.class})
+    public ResponseEntity<Object> sqlException(SQLServerException exception){
+        Map<String,Object> body = new HashMap<>();
+        body.put("timestamp", LocalDate.now());
+        body.put("errors", exception.getMessage());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 

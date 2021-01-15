@@ -4,21 +4,28 @@ import com.masterjava.news.models.Author;
 import com.masterjava.news.models.Category;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class ArticleDTO {
     private int id;
+    @NotNull
     @NotEmpty
     @Size(max = 30)
     private String title;
+    @NotNull
     @NotEmpty
-    @Size(min = 50)
+    @Size(min = 10)
     private String content;
+    @NotNull
     @NotEmpty
     private int authorId;
+    @NotNull
+    @NotEmpty
     private ArrayList<Integer> topicsIDs;
+    @NotNull
     @NotEmpty
     private Category category;
 

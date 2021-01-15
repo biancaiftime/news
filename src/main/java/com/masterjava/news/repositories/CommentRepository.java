@@ -64,4 +64,5 @@ public class CommentRepository {
                 new BeanPropertyRowMapper(Topic.class))));
         return article;
     }
+    public void deleteAll() {jdbcTemplate.update(CommentQueries.deleteAll);}
 }

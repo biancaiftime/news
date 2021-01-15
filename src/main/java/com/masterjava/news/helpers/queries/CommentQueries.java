@@ -6,4 +6,5 @@ public class CommentQueries {
     public static final String getCommentsByArticleId = "SELECT * FROM dbo.Comments WHERE articleId = ?";
     public static final String getCommentsByPersonName = "SELECT * FROM dbo.Comments WHERE personName = ?";
     public static final String deleteComment = "DELETE FROM dbo.Comments WHERE id = ?";
+    public static final String deleteAll = "DELETE FROM dbo.Comments";
 }

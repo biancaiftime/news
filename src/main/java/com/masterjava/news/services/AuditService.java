@@ -17,4 +17,6 @@ public class AuditService {
     public List<Audit> getAudit() {return auditRepository.getAudit();}
 
     public List<Audit> deleteRecord(int id) {return auditRepository.deleteRecord(id);}
+
+    public void deleteAll(){auditRepository.deleteAll();}
 }

@@ -6,4 +6,5 @@ public class TopicQueries {
     public static final String getByName = "SELECT * FROM dbo.Topics WHERE name = ?";
     public static final String getById = "SELECT * FROM dbo.Topics WHERE id = ?";
     public static final String delete = "DELETE FROM dbo.Topics WHERE id = ?";
+    public static final String deleteAll = "DELETE FROM dbo.Topics";
 }

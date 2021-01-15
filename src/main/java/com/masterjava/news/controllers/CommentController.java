@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/comments")
 public class CommentController {
@@ -24,8 +26,11 @@ public class CommentController {
     public ResponseEntity<?> getCommentsByPersonName(@RequestParam String name) {return ResponseEntity.ok().body(commentService.getCommentsByPersonName(name));}
 
     @PostMapping("/add")
-    public ResponseEntity<?> addComment(@RequestBody CommentDTO commentDTO) {return ResponseEntity.ok().body(commentService.addComment(commentDTO));}
+    public ResponseEntity<?> addComment(@RequestBody @Valid CommentDTO commentDTO) {return ResponseEntity.ok().body(commentService.addComment(commentDTO));}
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteComment(@RequestParam int id) {return ResponseEntity.ok().body(commentService.deleteComment(id));}
+
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<?> deleteAll() {commentService.deleteAll(); return ResponseEntity.ok("Deleted all comments");}
 }

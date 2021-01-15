@@ -30,4 +30,7 @@ public class AuthorController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteAuthor(@RequestParam int id) {return ResponseEntity.ok().body(authorService.deleteAuthor(id));}
+
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<?> deleteAll() {authorService.deleteAll(); return ResponseEntity.ok("Deleted all authors");}
 }

@@ -1,5 +1,6 @@
 package com.masterjava.news.repositories;
 
+import com.masterjava.news.helpers.queries.ArticleQueries;
 import com.masterjava.news.helpers.queries.TopicQueries;
 import com.masterjava.news.models.Author;
 import com.masterjava.news.models.Topic;
@@ -32,4 +33,5 @@ public class TopicRepository {
         jdbcTemplate.update(TopicQueries.delete, id);
         return jdbcTemplate.query(TopicQueries.getTopics, new BeanPropertyRowMapper<>(Topic.class));
     }
+    public void deleteAll() {jdbcTemplate.update(TopicQueries.deleteAll);}
 }

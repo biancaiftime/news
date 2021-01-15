@@ -23,6 +23,7 @@ public class AuthorService {
 
     public Author getAuthorByName(String name)
     {
+        name = name.trim();
         return authorRepository.getAuthorByName(name);
     }
 
@@ -35,4 +36,6 @@ public class AuthorService {
     {
         return authorRepository.deleteAuthor(id);
     }
+
+    public void deleteAll(){authorRepository.deleteAll();}
 }

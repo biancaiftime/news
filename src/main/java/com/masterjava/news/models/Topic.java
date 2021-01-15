@@ -1,8 +1,13 @@
 package com.masterjava.news.models;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Topic {
 
     private int id;
+    @Size(min = 5, max = 40)
+    @NotNull
     private String name;
 
     public int getId() {

@@ -3,13 +3,20 @@ package com.masterjava.news.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.masterjava.news.models.Article;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class CommentDTO {
 
     private int id;
+    @NotNull
+    @Size(min = 5, max = 40)
     private String personName;
+    @NotNull
+    @Size(min = 5, max = 256)
     private String text;
+    @NotNull
     private int articleId;
     @JsonIgnore
     private Date date;

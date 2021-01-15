@@ -25,6 +25,7 @@ public class TopicService {
 
     public Topic getTopicByName(String name)
     {
+        name = name.trim();
         return topicRepository.getTopicByName(name);
     }
 
@@ -37,4 +38,6 @@ public class TopicService {
     {
         return topicRepository.deleteTopic(id);
     }
+
+    public void deleteAll(){topicRepository.deleteAll();}
 }

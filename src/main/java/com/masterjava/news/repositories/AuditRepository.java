@@ -1,5 +1,6 @@
 package com.masterjava.news.repositories;
 
+import com.masterjava.news.helpers.queries.ArticleQueries;
 import com.masterjava.news.helpers.queries.AuditQueries;
 import com.masterjava.news.models.Audit;
 import com.masterjava.news.models.Author;
@@ -40,4 +41,6 @@ public class AuditRepository {
         jdbcTemplate.update(AuditQueries.deleteRecord, id);
         return jdbcTemplate.query(AuditQueries.getAudit, new BeanPropertyRowMapper<>(Audit.class));
     }
+
+    public void deleteAll() {jdbcTemplate.update(AuditQueries.deleteAll);}
 }

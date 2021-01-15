@@ -26,6 +26,7 @@ public class CommentService {
     }
     public List<Comment> getCommentsByPersonName(String name)
     {
+        name = name.trim();
         return commentRepository.getCommentsByPersonName(name);
     }
 
@@ -38,5 +39,6 @@ public class CommentService {
     {
         return commentRepository.deleteComment(id);
     }
+    public void deleteAll(){commentRepository.deleteAll();}
 
 }

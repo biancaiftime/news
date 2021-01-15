@@ -31,4 +31,7 @@ public class TopicController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteTopic(@RequestParam int id) {return ResponseEntity.ok().body(topicService.deleteTopic(id));}
+
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<?> deleteAll() {topicService.deleteAll(); return ResponseEntity.ok("Deleted all topics");}
 }

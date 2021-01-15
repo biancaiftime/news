@@ -17,4 +17,7 @@ public class AuditController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteRecord(@RequestParam int id) {return ResponseEntity.ok().body(auditService.deleteRecord(id));}
+
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<?> deleteAll() {auditService.deleteAll(); return ResponseEntity.ok("Deleted all audit");}
 }

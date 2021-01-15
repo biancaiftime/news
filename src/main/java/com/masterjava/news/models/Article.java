@@ -1,6 +1,7 @@
 package com.masterjava.news.models;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,14 +11,18 @@ public class Article {
     private int id;
     @NotEmpty
     @Size(max = 30)
+    @NotNull
     private String title;
     @NotEmpty
-    @Size(min = 50)
+    @NotNull
+    @Size(min = 10)
     private String content;
+    @NotNull
     @NotEmpty
     private Author author;
     private ArrayList<Topic> topics;
     @NotEmpty
+    @NotNull
     private Category category;
 
     private Date date;

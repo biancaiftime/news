@@ -7,4 +7,5 @@ public class AuthorQueries {
     public static final String getAuthorByName = "SELECT * FROM dbo.Authors WHERE firstName = ? ";
     public static final String deleteAuthor = "DELETE FROM dbo.Authors WHERE id = ?";
     public static final String getAuthorById = "SELECT * FROM dbo.Authors WHERE id = ?";
+    public static final String deleteAll = "DELETE FROM dbo.Authors";
 }
